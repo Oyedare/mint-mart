@@ -1,0 +1,12 @@
+{
+    "name": "Lion",
+    "description": "A fierce lion with a ruby-red mane.",
+    "image": "https://ipfs.io/ipfs/QmTY1D48LszYUhCJ8e8diXzzxkh9FNG2KTZaf2w5q4RHmQ",
+    "purchase_price": 90,
+    "attributes": [
+      { "trait_type": "Color", "value": "Ruby" },
+      { "trait_type": "Strength", "value": 88 },
+      { "trait_type": "Rarity", "value": "Epic" },
+      { "trait_type": "Roar Volume", "value": "100" }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Hawk",
+    "description": "A hawk with feathers that shimmer in bronze hues.",
+    "image": "https://ipfs.io/ipfs/QmazGL7oDQZimSBSUxV48eUpmZdBboaDHG9vZLE464ftDx",
+    "purchase_price": 65,
+    "attributes": [
+      { "trait_type": "Color", "value": "Bronze" },
+      { "trait_type": "Flight Speed", "value": 115 },
+      { "trait_type": "Rarity", "value": "Rare" },
+      { "trait_type": "Vision Clarity", "value": "98" }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Wolf",
+    "description": "A wolf that hunts in the moonlight with a sapphire glow.",
+    "image": "https://ipfs.io/ipfs/QmZBmMUAZhvtZzV9a2iXYtSTBmyKn5PmS2TUEcrT6jdjKT",
+    "purchase_price": 110,
+    "attributes": [
+      { "trait_type": "Color", "value": "Sapphire" },
+      { "trait_type": "Stealth", "value": 92 },
+      { "trait_type": "Rarity", "value": "Legendary" },
+      { "trait_type": "Howl Volume", "value": "85" }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Dragon",
+    "description": "A rare and powerful dragon from the legendary NFT collection.",
+    "image": "https://ipfs.io/ipfs/QmVLJJRZbhfdZGGX74nGPfSpBGQcujdKZQBP4btEssZeea",
+    "purchase_price": 100,
+    "attributes": [
+      { "trait_type": "Color", "value": "Gold" },
+      { "trait_type": "Strength", "value": 95 },
+      { "trait_type": "Rarity", "value": "Legendary" },
+      { "trait_type": "Power Level", "value": "5000" }
+    ]
+}
