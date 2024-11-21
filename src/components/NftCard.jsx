@@ -2,10 +2,10 @@
 import { useState } from 'react'
 import NftModal from './NftModal';
 
-const NftCard = ({collectibles, nftOwner}) => {
+const NftCard = ({collectibles, nftOwners}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [collectible,setCollectible] = useState({})
-
+    
     const toggle = (collectible) =>{
         setCollectible(collectible)
         setIsOpen(true)
@@ -13,7 +13,7 @@ const NftCard = ({collectibles, nftOwner}) => {
     return (
         <>
             <div className="flex items-center gap-8 flex-wrap mt-8" >
-                {collectibles.map((collectible, i)=>(
+                {[...collectibles].reverse().map((collectible, i)=>(
                     <div 
                     className="w-72 rounded-lg shadow-lg overflow-hidden bg-white transition-transform duration-200 hover:scale-105 cursor-pointer"
                     onClick={() => toggle(collectible)}
@@ -35,7 +35,9 @@ const NftCard = ({collectibles, nftOwner}) => {
                         <div className="p-4 bg-gray-50">
                             <div className="flex justify-between items-center w-full">
                             <span className="font-bold text-lg">{collectible.purchase_price}ETH</span>
-                            <span className="text-sm text-gray-600">Owner: {nftOwner.slice(0, 6) + '...' + nftOwner.slice(38, 42)}</span>
+                            {nftOwners.length > 0 && (
+                                <span className="text-sm text-gray-600">Owner: {[...nftOwners]?.reverse()[i].slice(0, 6) + '...' + [...nftOwners]?.reverse()[i].slice(38, 42)}</span>
+                            )}
                             </div>
                         </div>
                     </div>
