@@ -1,8 +1,9 @@
 {
+    "token_id": 3,
     "name": "Hawk",
     "description": "A hawk with feathers that shimmer in bronze hues.",
     "image": "https://ipfs.io/ipfs/QmazGL7oDQZimSBSUxV48eUpmZdBboaDHG9vZLE464ftDx",
-    "purchase_price": 65,
+    "purchase_price": 70,
     "attributes": [
       { "trait_type": "Color", "value": "Bronze" },
       { "trait_type": "Flight Speed", "value": 115 },

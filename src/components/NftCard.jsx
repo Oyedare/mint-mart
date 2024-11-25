@@ -1,13 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import NftModal from './NftModal';
+import { checkIsListed } from '../../helpers/fetchListingContract';
 
 const NftCard = ({collectibles, nftOwners}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [collectible,setCollectible] = useState({})
-    
-    const toggle = (collectible) =>{
+    const [isListed, setIsListed] = useState(null)
+    const [owner, setOwner] = useState(null)
+
+    const toggle = async(collectible, nftOwners) =>{
         setCollectible(collectible)
+        setOwner(nftOwners)
+        let isListed = await checkIsListed(collectible.token_id)
+        setIsListed(isListed)
         setIsOpen(true)
     }
     return (
@@ -16,7 +22,7 @@ const NftCard = ({collectibles, nftOwners}) => {
                 {[...collectibles].reverse().map((collectible, i)=>(
                     <div 
                     className="w-72 rounded-lg shadow-lg overflow-hidden bg-white transition-transform duration-200 hover:scale-105 cursor-pointer"
-                    onClick={() => toggle(collectible)}
+                    onClick={() => toggle(collectible, [...nftOwners].reverse()[i])}
                     key={i}
                     >
                         <div className="h-48 overflow-hidden">
@@ -49,7 +55,10 @@ const NftCard = ({collectibles, nftOwners}) => {
                     isOpen={isOpen} 
                     setIsOpen={setIsOpen}
                     collectible={collectible}
-
+                    isListed = {isListed}
+                    setIsListed = {setIsListed}
+                    owner = {owner}
+                    setOwner = {setOwner}
                 />
             )}
         </>

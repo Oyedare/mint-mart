@@ -1,5 +1,6 @@
-export const constructMetadata = (name, description, imageHash, purchasePrice,color,strength,rarity,powerLevel) => (
+export const constructMetadata = (tokenId,name, description, imageHash, purchasePrice,color,strength,rarity,powerLevel) => (
     {
+        token_id: tokenId,
         name,
         description,
         image: `https://ipfs.io/ipfs/${imageHash}`,

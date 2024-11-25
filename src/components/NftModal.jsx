@@ -1,6 +1,86 @@
 /* eslint-disable react/prop-types */
-const NftModal = ({ isOpen, setIsOpen, collectible}) => {
-    if (!isOpen) return null;
+import { useEffect, useState } from "react";
+import { buy, cancelListing, checkIsListed, listNft } from "../../helpers/fetchListingContract";
+import { getSigner } from "../../helpers/getSigners";
+import { tokens } from "../../lib/convertPriceToEthers";
+
+const NftModal = ({ isOpen, setIsOpen, collectible, isListed, setIsListed, owner, setOwner}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [connectedAccount, setConnectedAccount] = useState(false);
+  
+  const getConnectedAccount = async () => {
+    try {
+      const connectedAccount = await getSigner();
+      setConnectedAccount(connectedAccount);
+      
+    } catch (error) {
+      console.error("Error fetching connected account:", error);
+      setConnectedAccount(null);
+    }
+  };
+  
+  useEffect(() => {
+    getConnectedAccount();
+  
+    if (window.ethereum) {
+      const handleAccountChange = async (accounts) => {
+        if (accounts.length > 0) {
+          const connectedAccount = await getSigner();
+          setConnectedAccount(connectedAccount);
+        } else {
+          setConnectedAccount(null); // Handle account disconnect
+        }
+      };
+  
+      window.ethereum.on("accountsChanged", handleAccountChange);
+  
+      return () => {
+        window.ethereum.removeListener("accountsChanged", handleAccountChange);
+      };
+    }
+  }, []);
+  
+
+  if (!isOpen) return null;
+
+    const handleListing = async (tokenId, price) =>{
+      setIsLoading(true)
+      try{
+        await listNft(tokenId, tokens(price))
+        let isListed = await checkIsListed(tokenId)
+        setIsListed(isListed)
+        setIsLoading(false)
+      }catch(error){
+        console.error(error)
+        setIsLoading(false)
+      }
+    }
+
+    const handleSaleCancel = async (tokenId) =>{
+      setIsLoading(true)
+      try{
+        await cancelListing(tokenId)
+        let isListed = await checkIsListed(tokenId)
+        setIsListed(isListed)
+        setIsLoading(false)
+      }catch(error){
+        console.error(error)
+        setIsLoading(false)
+      }
+    }
+
+    const handleBuy = async (tokenId, purchasePrice) =>{
+      setIsLoading(true)
+      try{
+        const buyTx = await buy(tokenId, purchasePrice)
+        setIsListed(false)
+        setOwner(buyTx.from)
+        setIsLoading(false)
+      }catch(error){
+        console.error(error)
+        setIsLoading(false)
+      }
+    }
     
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -16,7 +96,6 @@ const NftModal = ({ isOpen, setIsOpen, collectible}) => {
   
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">{collectible.name}</h2>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="w-full h-64 overflow-hidden rounded-lg">
                 <img 
@@ -44,6 +123,26 @@ const NftModal = ({ isOpen, setIsOpen, collectible}) => {
                     </div>
                   </div>
                 ))}
+                
+                {isListed ? (
+                  connectedAccount.address === owner ? (
+                    <button onClick={()=>handleSaleCancel(collectible.token_id)} type="button" className='btn-danger'>
+                      {isLoading ? "Cancelling" : "Cancel Sale"}
+                    </button>  
+                  ):(
+                    <button onClick={()=>handleBuy(collectible.token_id, collectible.purchase_price)} type="button" className='nav__connect'>
+                      {isLoading ? "Buying" : "Buy"}
+                    </button>  
+                  )
+                ):(
+                  connectedAccount.address === owner ? (
+                    <button onClick={() =>handleListing(collectible.token_id, collectible.purchase_price)} type="button" className='nav__connect'>
+                      {isLoading ? "Listing" : "List for Sale"}
+                    </button> 
+                  ):(
+                    <p className="text-red-500">Not available for sale</p>
+                  )
+                )}
               </div>
             </div>
           </div>

@@ -1,8 +1,9 @@
 {
+    "token_id": 1,
     "name": "Dragon",
     "description": "A rare and powerful dragon from the legendary NFT collection.",
     "image": "https://ipfs.io/ipfs/QmVLJJRZbhfdZGGX74nGPfSpBGQcujdKZQBP4btEssZeea",
-    "purchase_price": 100,
+    "purchase_price": 90,
     "attributes": [
       { "trait_type": "Color", "value": "Gold" },
       { "trait_type": "Strength", "value": 95 },

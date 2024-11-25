@@ -38,10 +38,10 @@ function App() {
    
   const loadBlockChainData = async() =>{
     const collectibles = await fetchAllNftMetaData()
-    setCollectibles(collectibles)
+    setCollectibles(collectibles)    
 
     const owners = await getOwnerOfNfts()
-    setNftOwners(owners)    
+    setNftOwners(owners)
   }
 
   useEffect(() => {  

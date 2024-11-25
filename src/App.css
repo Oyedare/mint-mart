@@ -17,7 +17,7 @@ nav {
   font-weight: 800;
 }
 
-.nav__connect {
+.nav__connect,.btn-danger {
   width: 175px;
   height: 50px;
 
@@ -33,6 +33,10 @@ nav {
 
   cursor: pointer;
   transition: all 250ms ease;
+}
+
+.btn-danger{
+  background-color: rgb(226, 8, 8);
 }
 
 .nav__connect:hover {

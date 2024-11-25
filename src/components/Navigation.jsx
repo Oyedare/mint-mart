@@ -15,6 +15,10 @@ const Navigation = ({account, setAccount}) => {
         setAccount(account);
     }
 
+    const disconnect = () =>{
+        setAccount(null)
+    }
+
     const openForm = () => {
         setIsFormOpen(true);
       };
@@ -36,6 +40,7 @@ const Navigation = ({account, setAccount}) => {
                     <button
                         type="button"
                         className='nav__connect'
+                        onClick={disconnect}
                     >
                         {account.slice(0, 6) + '...' + account.slice(38, 42)}
                     </button> 

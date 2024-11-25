@@ -1,8 +1,9 @@
 {
+    "token_id": 2,
     "name": "Tiger",
     "description": "An elusive tiger with emerald-colored stripes.",
     "image": "https://ipfs.io/ipfs/QmaPregGKhU6Sn1kmsWcd6LeuYrySF8RDhh56L8EXNXCaY",
-    "purchase_price": 75,
+    "purchase_price": 80,
     "attributes": [
       { "trait_type": "Color", "value": "Emerald" },
       { "trait_type": "Stealth", "value": 85 },

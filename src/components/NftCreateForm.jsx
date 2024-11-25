@@ -5,6 +5,9 @@ import FailModal from './FailModal';
 // import { getLastMetadataIndex } from '../../helpers/FetchNftUri';
 import { uploadNewMetadata } from '../../helpers/uploadMetaDataToIPFS';
 import { mintNewNFT } from '../../helpers/mintNewNft';
+import { fetchNftTotalSupply } from '../../helpers/FetchNftUri';
+import { listNft } from '../../helpers/fetchListingContract';
+import { tokens } from '../../lib/convertPriceToEthers';
 
 const NFTCreateForm = ({setIsFormOpen}) => {
   const [name, setName] = useState('');
@@ -26,9 +29,11 @@ const NFTCreateForm = ({setIsFormOpen}) => {
 const handleMint = async () => {
     try{
         setIsLoading(true)
-        // const lastIndex = await getLastMetadataIndex();
-        const newMetadataLink = await uploadNewMetadata(name, description, image, purchasePrice, color, strength, rarity, powerLevel);
+        const totalSupply = await fetchNftTotalSupply();
+        let tokenId = Number(totalSupply) + 1
+        const newMetadataLink = await uploadNewMetadata(tokenId,name, description, image, purchasePrice, color, strength, rarity, powerLevel);
         await mintNewNFT(newMetadataLink);
+        await listNft(tokenId, tokens(purchasePrice))
         setShowSuccessModal(true)
         closeForm()
     }catch(error){
