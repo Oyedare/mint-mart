@@ -15,9 +15,13 @@
     "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.7",
     "ethers": "^6.13.4",
+    "lucide-react": "^0.462.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.1"
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^7.0.1",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^10.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

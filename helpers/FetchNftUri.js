@@ -42,6 +42,14 @@ export const fetchAllNftMetaData = async () =>{
     return collectibles;
 }
 
+export const fetchSingleMetaData = async (tokenId) =>{
+    const mintableNFT = await getNftContract()
+    const uri = await mintableNFT.tokenURI(tokenId)
+    const res = await fetch(uri)
+    const metadata = await res.json()
+    return metadata
+}
+
 export const getOwnerOfNfts = async() =>{
     const mintableNFT = await getNftContract()
     const totalNFTSupply = await fetchNftTotalSupply()
@@ -53,4 +61,10 @@ export const getOwnerOfNfts = async() =>{
         owners.push(owner)
     }
     return owners;
+}
+
+export const getSingleNftOwner = async (tokenId) =>{
+    const mintableNFT = await getNftContract()
+    const owner = await mintableNFT.ownerOf(tokenId);        
+    return owner;
 }

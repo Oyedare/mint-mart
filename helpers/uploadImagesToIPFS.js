@@ -17,7 +17,6 @@ export const uploadFileToIPFS = async (file) => {
           Authorization: `Bearer ${import.meta.env.VITE_JWT}`,
         },
       });
-      console.log(response.data.IpfsHash);
       return response.data.IpfsHash;
     } catch (error) {
       console.error("Error uploading file:", error);
